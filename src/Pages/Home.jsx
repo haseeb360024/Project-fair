@@ -13,7 +13,7 @@ function Home() {
         <Col sm={12} md={6}>
           <h1 style={{fontSize:'80px'}} className='fw-bolder text-light'> <i class="fa-brands fa-stack-overflow fa-bounce"></i> Project Fair</h1>
           <p>One Stop Destination for all software hgdfjgdifgdg dfgjdfhg dfgjdfgn dgbujdfbgdf mguidfg dfgbjhdjg dfbnhdfg fdbudfhg dfnmmbdfkbdfb inbdf bidfbdf bfdibidfbnfdibnfidgbobdf bdfoghdfnbuidfb dfb odfbdfkbdfkb dfbfdibfd buidb dfbdfuibrfbfdgb </p>
-          <button className=' btn btn-warning'>Start to Explore <i class="fa-solid fa-right-long fa-beat ms-2"></i></button>
+          <Link to={'/login'} className=' btn btn-warning'>Start to Explore <i class="fa-solid fa-right-long fa-beat ms-2"></i></Link>
         </Col>
 
         <Col sm={12} md={6}>
@@ -26,7 +26,7 @@ function Home() {
 
        {/*all projects */}
        <div className="all-projects mt-5">
-        <h1 className='text-center'> Explore Our Projects</h1>
+        <h1 className='text-center mb-5'> Explore Our Projects</h1>
 
         <marquee scrollAmount={25}>
         <div className='d-flex justify-content-between'>

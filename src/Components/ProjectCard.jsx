@@ -19,7 +19,7 @@ function ProjectCard() {
 <Modal size='lg' show={show} onHide={handleClose}>
 
     <Modal.Header closeButton>
-        <Modal.Title>Modal Heading</Modal.Title>
+        <Modal.Title>Media Player</Modal.Title>
     </Modal.Header>
     <Modal.Body> 
      <Row>
@@ -27,7 +27,7 @@ function ProjectCard() {
             <img style={{height:'200px'}} className='img-fluid' src={projectPic} alt="project image" />
         </Col>
         <Col md={6}>
-            <h2>Project Title</h2>
+            <h2>Media Player</h2>
             <p>sdfsdjsdsd  dgvsdfgbs sdhgbsdgvvbsdfg sdfvbds ghsdnafgv vdf sdhfg ufbwefbhs fsdfhfb sdsyhv dfvbubfg sd ghs vsd vsdvsufgs nsd vujsdvg n vhdsvbds vsdjhvdbsvsdbn ms bvuiosdvb vjsdivsivsdkvbisv sdjvbnsigvsdmvsd hn</p>
             <p>Language Used: <span className='fw-bolder'> HTML, CSS ,React</span></p>
 
