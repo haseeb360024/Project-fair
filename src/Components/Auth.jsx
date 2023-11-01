@@ -1,7 +1,7 @@
 import React from 'react'
 import {  Link } from 'react-router-dom'
 import { Form } from 'react-bootstrap'
-function Auth(register) {
+function Auth({register}) {
      const isRegisterForm = register?true:false
   return (
     <div style={{width:'100%',height:'100vh'}} className='d-flex justify-content-center align-items-center'>
@@ -17,7 +17,7 @@ function Auth(register) {
                     <h1 className='fw-bolder text-light mt-2'> <i class="fa-brands fa-stack-overflow fa-bounce"></i>Project Fair</h1>
                     <h5 className='fw-bolder mt-4 pb-3 text-light'>
                         {
-                            isRegisterForm ? 'Sign up to your Account ':'Sign up to you Account'
+                            isRegisterForm ? 'Sign up to your Account ':'Sign in to you Account'
                         }
                     </h5>
                     <Form className='text-light w-100'>
