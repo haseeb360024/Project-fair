@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import ProjectCard from '../Components/ProjectCard'
 import titleImage from '../Assets/download.png'
+
 function Home() {
+  const [loggedIn,setLoggedin] = useState(false)
+  useEffect(()=>{
+    if(sessionStorage.getItem("token")){
+      setLoggedin(true)
+    }else{
+      setLoggedin(false)
+    }
+  },[])
   return (
     <>
     {/*landing section */}
@@ -13,7 +22,11 @@ function Home() {
         <Col sm={12} md={6}>
           <h1 style={{fontSize:'80px'}} className='fw-bolder text-light'> <i class="fa-brands fa-stack-overflow fa-bounce"></i> Project Fair</h1>
           <p>One Stop Destination for all software hgdfjgdifgdg dfgjdfhg dfgjdfgn dgbujdfbgdf mguidfg dfgbjhdjg dfbnhdfg fdbudfhg dfnmmbdfkbdfb inbdf bidfbdf bfdibidfbnfdibnfidgbobdf bdfoghdfnbuidfb dfb odfbdfkbdfkb dfbfdibfd buidb dfbdfuibrfbfdgb </p>
+          {loggedIn?
+            <Link to={'/dashboard'} className=' btn btn-warning'>manage your projects<i class="fa-solid fa-right-long fa-beat ms-2"></i></Link>:
           <Link to={'/login'} className=' btn btn-warning'>Start to Explore <i class="fa-solid fa-right-long fa-beat ms-2"></i></Link>
+          
+          }
         </Col>
 
         <Col sm={12} md={6}>

@@ -1,8 +1,60 @@
-import React from 'react'
-import {  Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import {  Link, useNavigate } from 'react-router-dom'
 import { Form } from 'react-bootstrap'
+import { loginAPI, registerAPI } from '../Services/allAPI'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function Auth({register}) {
+    const navigate = useNavigate()
+    const [userData,setUserData] = useState({
+        username:"",email:"",password:""
+    })
      const isRegisterForm = register?true:false
+     const handleRegister = async (e)=>{
+        e.preventDefault()
+        const {username,email,password}= userData
+        if(!username || !email || !password){
+            toast.info("Plaese fill the form completely")
+        }else{
+            const result = await registerAPI(userData)
+            console.log(result);
+            if(result.status===200){
+                toast.success(`${result.data.username} has registered successfully`)
+                setUserData({
+                    username:"",email:"",password:""
+                })
+                navigate('/login')
+            }else{ 
+               toast.warning(result.response.data)
+               console.log(result);
+            }
+        }
+     }
+
+     const handleLogin = async (e)=>{
+        e.preventDefault()
+        const {email,password}= userData
+        if(!email || !password){
+            toast.info("Plaase fill the form completely")
+        }else{
+            const result = await loginAPI(userData)
+            console.log(result);
+            if(result.status===200){
+               // toast.success(`${result.data.username} has registered successfully`)
+               sessionStorage.setItem("existingUser",JSON.stringify(result.data.existingUser))
+               sessionStorage.setItem("token",result.data.token)
+                setUserData({
+                   email:"",password:""
+                })
+                navigate('/')
+            }else{ 
+               toast.warning(result.response.data)
+               console.log(result);
+            }
+        }
+
+     }
   return (
     <div style={{width:'100%',height:'100vh'}} className='d-flex justify-content-center align-items-center'>
         <div className='w-75 container'>
@@ -24,23 +76,23 @@ function Auth({register}) {
                         {
                             isRegisterForm &&
                             <Form.Group className="mb-3" controlId="formBasicName">
-                                <Form.Control type="text" placeholder="Username" />
+                                <Form.Control type="text" placeholder="Username" value={userData.username} onChange={e=>setUserData({...userData,username:e.target.value})}/>
                           </Form.Group>
                         }
                          <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Control type="email" placeholder="Enter email ID" />
+                            <Form.Control type="email" placeholder="Enter email ID" value={userData.email} onChange={e=>setUserData({...userData,email:e.target.value})}/>
                          </Form.Group>
                          <Form.Group className="mb-3" controlId="formBasicpaswd">
-                            <Form.Control type="email" placeholder="Entter Password" />
+                            <Form.Control type="password" placeholder="Enter Password" value={userData.password} onChange={e=>setUserData({...userData,password:e.target.value})} />
                          </Form.Group>
                          {
                             isRegisterForm ? 
                             <div className='mt-3'>
-                                <button className='btn btn-light mb-2'>Register</button>
+                                <button onClick={handleRegister} className='btn btn-light mb-2'>Register</button>
                                 <p>Already Have Account? Click here to <Link to={'/login'}>Login</Link></p>
                             </div>:
                             <div className='mt-3'>
-                            <button className='btn btn-light mb-2'>Login</button>
+                            <button onClick={handleLogin} className='btn btn-light mb-2'>Login</button>
                             <p>New User? Click here to <Link to={'/register'}>Register</Link></p>
                         </div>
                          }
@@ -50,6 +102,7 @@ function Auth({register}) {
             </div>
         </div>
     </div>
+    <ToastContainer position='top-right' autoClose={2000} theme="colored"/>
 </div>
   )
 }
