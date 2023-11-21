@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { addProjectAPI } from '../Services/allAPI';
-import lol from '../Assets/download.png';
+import lol from '../Assets/No-Image-Placeholder.svg.png';
 
 function AddProjects() {
     const [show, setShow] = useState(false);
@@ -79,7 +79,7 @@ function AddProjects() {
                     <Modal.Header closeButton>
                         <Modal.Title>Modal heading</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>
+                    <Modal.Body style={{backgroundColor:"white" , borderRadius:"20px"}}>
                         <div className="row">
                             <div className="col-lg-6 d-flex align-items-center">
                                 <label>
