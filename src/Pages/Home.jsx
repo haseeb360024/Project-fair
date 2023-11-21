@@ -3,15 +3,32 @@ import { Col, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import ProjectCard from '../Components/ProjectCard'
 import titleImage from '../Assets/download.png'
+import { homeProjectAPI } from '../Services/allAPI'
 
 function Home() {
   const [loggedIn,setLoggedin] = useState(false)
+  const [homeProjects,setHomeProjects] = useState([])
+  const getHomeProjects = async ()=>{
+    const result = await homeProjectAPI()
+    if(result.status===200){
+      setHomeProjects(result.data)
+
+    }else{
+      console.log(result);
+      console.log(result.response.data);
+    }
+  }
+  
   useEffect(()=>{
     if(sessionStorage.getItem("token")){
       setLoggedin(true)
     }else{
       setLoggedin(false)
     }
+
+    //api call
+    getHomeProjects()
+
   },[])
   return (
     <>
@@ -43,9 +60,14 @@ function Home() {
 
         <marquee scrollAmount={25}>
         <div className='d-flex justify-content-between'>
-
+          {homeProjects?.length>0?homeProjects.map(project=>(
+            <div className='me-5'>
+               <ProjectCard project={project}/>
+            </div>
+          )):null
+        }
           <div style={{width:'500px'}}>
-            <ProjectCard/>
+           
             </div>
       
             </div>
